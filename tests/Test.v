@@ -1,6 +1,3 @@
-Add Rec ML Path "../".
-Add LoadPath "../src" as Pwilke.
-
 Require Import Pwilke.
 
 Inductive P : nat -> Prop :=
