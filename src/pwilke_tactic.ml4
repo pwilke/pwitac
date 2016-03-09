@@ -10,9 +10,7 @@ let safe_find_rectype (env: Environ.env) (c: Term.constr) : ((Names.inductive * 
   try Left (Inductive.find_rectype env c) with
     Not_found -> Right (Printf.sprintf "Couldn't find inductive type %s\n" (string_of_constr c))
 
-
-					     
-
+		       
 let current_subgoal () =
   let p = Proof_global.give_me_the_proof () in
   let sgl = Proof.V82.subgoals p in
@@ -88,3 +86,5 @@ END
 VERNAC COMMAND EXTEND PwilkeAppHyps
   | ["AppHyps"] -> [applicable_hypotheses ()]
 END
+
+

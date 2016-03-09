@@ -3,3 +3,6 @@
 ./src/pwilke_tactic.ml4
 ./src/Pwilke.v
 ./tests/Test.v
+./src/equate.ml4
+./src/Equate.v
+./tests/TestEquate.v

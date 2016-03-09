@@ -2,6 +2,14 @@ Require Import Equate.
 Require Import ZArith.
 Open Scope Z_scope.
 
+Require Import Psatz.
+
+Goal forall (a b c d e f g : Z),
+    (a * b) * (d + e * b - b * g * f) = f * b - e * c -> False.
+Proof.
+  intros.
+  factor b H. lia.
+Abort.
 
 Definition align := 
 fun n amount : Z => (n + amount - 1) / amount * amount.
@@ -35,10 +43,10 @@ Proof.
   rewrite two_power_nat_S. rewrite inj_S. rewrite two_p_S. omega. omega.
 Qed.
 
-Require Import Psatz.
+
 Lemma align_le_two_p:
   forall al al' (AlGt: (al <= al')%nat) x,
-    (al' <= 12)%nat ->
+    (* (al' <= 12)%nat -> *)
     align (align x (two_power_nat al)) (two_power_nat al') = align x (two_power_nat al').
 Proof.
   intros.
@@ -52,11 +60,14 @@ Proof.
   rewrite EQ in *. clear EQ.
   generalize dependent (two_power_nat (al' - al)). intros.
 
-  equate x H3. lia. clear H3. subst.
-  equate z0 H4. lia. clear H4. subst.
+  factor z5 H3. ring_simplify. lia.
+  
+  equate x H1. lia. clear H1. subst.
+  equate z0 H3. lia. clear H3. subst.
   equate z4 H2. lia. clear H2. subst.
-  f_equal.
+  
   generalize dependent (two_power_nat al). intros.
+  f_equal.
   remember (z1 - z5 * z3 - 1) as V1.
   assert (V1 = 0 \/ V1 < 0 \/ V1 > 0) by lia.
   intuition ; try nia.  
